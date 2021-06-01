@@ -2,10 +2,8 @@
 
 namespace bubbstore\Iugu\Services;
 
-use bubbstore\Iugu\TestCase;
 use bubbstore\Iugu\Iugu;
-use bubbstore\Iugu\Exceptions\IuguException;
-use bubbstore\Iugu\Exceptions\IuguValidationException;
+use bubbstore\Iugu\TestCase;
 
 class ChargeTest extends TestCase
 {
@@ -15,10 +13,9 @@ class ChargeTest extends TestCase
      */
     protected $iugu;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-
         $this->iugu = new Iugu(
             'TOKEN'
         );
@@ -26,7 +23,7 @@ class ChargeTest extends TestCase
 
     public function test_charge_boleto()
     {
-        $body = __DIR__.'/../ResponseSamples/Charges/ChargeCreated.json';
+        $body = __DIR__ . '/../ResponseSamples/Charges/ChargeCreated.json';
         $http = $this->mockHttpClient($body);
 
         $charge = new Charge($http, $this->iugu);

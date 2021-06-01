@@ -2,10 +2,8 @@
 
 namespace bubbstore\Iugu;
 
-use Mockery;
-use GuzzleHttp\ClientInterface;
-use bubbstore\Iugu\Services\Customer;
 use bubbstore\Iugu\Contracts\CustomerInterface;
+use Mockery;
 
 class ClientTest extends TestCase
 {
@@ -14,10 +12,9 @@ class ClientTest extends TestCase
      */
     protected $iugu;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
-
         $this->iugu = new Iugu(
             'TOKEN',
             Mockery::mock(CustomerInterface::class)

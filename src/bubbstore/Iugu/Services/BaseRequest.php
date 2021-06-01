@@ -38,6 +38,11 @@ class BaseRequest
      */
     protected $response;
 
+    /**
+     * BaseRequest constructor.
+     * @param ClientInterface $http
+     * @param Iugu $iugu
+     */
     public function __construct(ClientInterface $http, Iugu $iugu)
     {
         $this->http = $http;
@@ -71,6 +76,10 @@ class BaseRequest
     /**
      * sendApiRequest
      *
+     * @param $method
+     * @param $path
+     * @throws IuguException
+     * @throws IuguValidationException
      * @return void
      */
     protected function sendApiRequest($method, $path)

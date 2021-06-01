@@ -2,17 +2,17 @@
 
 namespace bubbstore\Iugu;
 
-use bubbstore\Iugu\Contracts\CustomerInterface;
-use bubbstore\Iugu\Contracts\PaymentMethodInterface;
 use bubbstore\Iugu\Contracts\ChargeInterface;
+use bubbstore\Iugu\Contracts\CustomerInterface;
 use bubbstore\Iugu\Contracts\InvoiceInterface;
-use bubbstore\Iugu\Services\Customer;
-use bubbstore\Iugu\Services\PaymentMethod;
-use bubbstore\Iugu\Services\Charge;
-use bubbstore\Iugu\Services\Invoice;
+use bubbstore\Iugu\Contracts\PaymentMethodInterface;
 use bubbstore\Iugu\Exceptions\IuguException;
-use GuzzleHttp\ClientInterface;
+use bubbstore\Iugu\Services\Charge;
+use bubbstore\Iugu\Services\Customer;
+use bubbstore\Iugu\Services\Invoice;
+use bubbstore\Iugu\Services\PaymentMethod;
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\ClientInterface;
 
 class Iugu
 {
@@ -67,15 +67,15 @@ class Iugu
         $this->apiKey = $apiKey;
         $this->http = $http ?: new HttpClient([
             'base_uri' => 'https://api.iugu.com/v1/',
-            'headers' => [
+            'headers'  => [
                 'Authorization' => sprintf('Basic %s', base64_encode($apiKey.':'.'')),
             ],
         ]);
 
-        $this->customer = $customer ?: new Customer($this->http, $this);
+        $this->customer      = $customer      ?: new Customer($this->http, $this);
         $this->paymentMethod = $paymentMethod ?: new PaymentMethod($this->http, $this);
-        $this->charge = $charge ?: new Charge($this->http, $this);
-        $this->invoice = $invoice ?: new Invoice($this->http, $this);
+        $this->charge        = $charge        ?: new Charge($this->http, $this);
+        $this->invoice       = $invoice       ?: new Invoice($this->http, $this);
     }
 
     /**
